@@ -6,7 +6,7 @@
         <div class="grid grid-cols-6 gap-6">
             {% for item in items %}
                 <div>
-                    <a href="#">
+                    <a href="{% url 'item:detail' item.id %}">
                         <div class="">
                             <img src="{{ item.image.url}}" class="rounded-t-xl object-cover h-48 w-96">
                         </div>                    
