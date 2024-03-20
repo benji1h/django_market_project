@@ -1,0 +1,48 @@
+{% extends 'core/base.html '%}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="pb-6 grid grid-cols-4 gap-4">
+        <div class="col-span-1">
+            <form method="get" action="{% url 'item:items' %}">
+                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Find a bike, sandwich, ...">
+
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+            </form>
+            <hr class="my-6">
+            <p class="font-semibold">Categories</p>
+
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 rounded-xl {% if category.id == category_id %} bg-gray-200{% endif %}">
+                        <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Clear filters</a>
+        </div>
+        <div class="col-span-3">
+            <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+                <h2 class="mb-12 text-2xl text-center">Items</h2>
+                <div class="grid grid-cols-6 gap-6">
+                    {% for item in items %}
+                        <div>
+                            <a href="{% url 'item:detail' item.id %}">
+                                <div class="">
+                                    {% if item.image %}
+                                    <img src="{{ item.image.url}}" class="rounded-t-xl object-cover h-48 w-96">
+                                    {% endif %}
+                                </div>                    
+                                <div class="p-6 bg-white rounded-b-xl">
+                                    <h2 class="text-2xl">{{ item.name }}</h2>
+                                    <p class="text-gray-500">Price: {{ item.price }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
