@@ -14,6 +14,8 @@ import stripe
 
 # Create your views here.
 
+# STRIPES
+
 class SuccessView(TemplateView):
     template_name = 'item/success.html'
 
@@ -58,6 +60,16 @@ def create_checkout_session(request):
         except Exception as e:
             return JsonResponse({'error': str(e)})
 
+# END STRIPES
+        
+def itemsstripes(request):
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    itemsstripes = stripe.Product.list(limit=3)
+  
+    return render(request, 'item/itemsstripes.html',{
+        'itemsstripes' : itemsstripes
+    })
 
 def items(request):
     query = request.GET.get('query', '')
