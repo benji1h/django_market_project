@@ -1,1 +1,32 @@
-{{ itemsstripes }}
+{% extends 'core/base.html '%}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="pb-6 grid grid-cols-4 gap-4">
+        
+        <div class="col-span-3">
+            <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+                <h2 class="mb-12 text-2xl text-center">Itemsstripes</h2>
+                <div class="grid grid-cols-6 gap-6">
+                    {% for item in itemsstripes %}
+                        
+                        <div>
+                            <a href="#">
+                                <div class="">
+                                    {% if item.images.0 %}
+                                        <img src="{{ item.images.0}}" class="rounded-t-xl object-cover h-48 w-96">
+                                    {% endif %}
+                                </div>                    
+                                <div class="p-6 bg-white rounded-b-xl">
+                                    <h2 class="text-2xl">{{ item.name }}</h2>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor%}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
